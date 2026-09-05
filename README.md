@@ -6,9 +6,11 @@ A sleek, responsive, and component-driven Todo List application built with **Rea
 
 ## 📸 Screenshots
 
-| ☀️ Light Mode | 🌙 Dark Mode |
-| :---: | :---: |
-| ![Light Mode](./screenshots/light-mode.png) | ![Dark Mode](./screenshots/dark-mode.png) |
+### ☀️ Light Mode
+![Light Mode](screenshots/light-mode.png)
+
+### 🌙 Dark Mode
+![Dark Mode](screenshots/dark-mode.png)
 
 ---
 
