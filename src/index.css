@@ -1,12 +1,139 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
-body {
-  font-family: 'Outfit', sans-serif;
-  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-  background-attachment: fixed;
-  transition: background 0.3s ease;
+
+/* ── Light mode tokens ───────────────────────────── */
+:root {
+  --clr-bg:               linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  --clr-nav:              rgba(255, 255, 255, 0.75);
+  --clr-nav-border:       #e5e7eb;
+  --clr-card:             rgba(255, 255, 255, 0.65);
+  --clr-card-border:      rgba(255, 255, 255, 0.45);
+  --clr-input:            #ffffff;
+  --clr-input-border:     #e5e7eb;
+  --clr-input-text:       #1f2937;
+  --clr-input-ph:         #9ca3af;
+  --clr-item:             rgba(255, 255, 255, 0.82);
+  --clr-item-hover:       #ffffff;
+  --clr-item-border:      rgba(99, 102, 241, 0.12);
+  --clr-title:            #1e1b4b;
+  --clr-subtitle:         #6b7280;
+  --clr-label:            #374151;
+  --clr-heading:          #1f2937;
+  --clr-task:             #374151;
+  --clr-task-done:        #9ca3af;
+  --clr-empty-bg:         rgba(255, 255, 255, 0.4);
+  --clr-empty-border:     #d1d5db;
+  --clr-empty-text:       #6b7280;
+  --clr-toggle-track:     #e5e7eb;
+  --clr-toggle-label:     #374151;
+  --clr-btn-edit-bg:      #eef2ff;
+  --clr-btn-edit-text:    #4f46e5;
+  --clr-btn-edit-hover:   #e0e7ff;
+  --clr-btn-del-bg:       #fff1f2;
+  --clr-btn-del-text:     #dc2626;
+  --clr-btn-del-hover:    #ffe4e6;
 }
 
-.dark body {
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+/* ── Dark mode tokens ────────────────────────────── */
+html.dark {
+  --clr-bg:               linear-gradient(135deg, #0c0921 0%, #150f30 100%);
+  --clr-nav:              rgba(11, 8, 30, 0.93);
+  --clr-nav-border:       rgba(99, 102, 241, 0.2);
+  --clr-card:             rgba(16, 12, 40, 0.88);
+  --clr-card-border:      rgba(99, 102, 241, 0.15);
+  --clr-input:            #130e35;
+  --clr-input-border:     rgba(99, 102, 241, 0.3);
+  --clr-input-text:       #e0e7ff;
+  --clr-input-ph:         #6366f1;
+  --clr-item:             rgba(20, 15, 48, 0.9);
+  --clr-item-hover:       rgba(28, 22, 60, 1);
+  --clr-item-border:      rgba(99, 102, 241, 0.22);
+  --clr-title:            #c7d2fe;
+  --clr-subtitle:         #818cf8;
+  --clr-label:            #a5b4fc;
+  --clr-heading:          #e0e7ff;
+  --clr-task:             #c7d2fe;
+  --clr-task-done:        #4338ca;
+  --clr-empty-bg:         rgba(20, 15, 48, 0.6);
+  --clr-empty-border:     rgba(99, 102, 241, 0.22);
+  --clr-empty-text:       #818cf8;
+  --clr-toggle-track:     #2d2060;
+  --clr-toggle-label:     #a5b4fc;
+  --clr-btn-edit-bg:      rgba(79, 70, 229, 0.15);
+  --clr-btn-edit-text:    #a5b4fc;
+  --clr-btn-edit-hover:   rgba(79, 70, 229, 0.28);
+  --clr-btn-del-bg:       rgba(220, 38, 38, 0.12);
+  --clr-btn-del-text:     #fca5a5;
+  --clr-btn-del-hover:    rgba(220, 38, 38, 0.25);
 }
+
+/* ── Base ────────────────────────────────────────── */
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--clr-bg);
+  background-attachment: fixed;
+  transition: background 0.4s ease;
+}
+
+/* ── Theme utility classes ───────────────────────── */
+.t-nav {
+  background-color: var(--clr-nav);
+  border-color: var(--clr-nav-border);
+}
+
+.t-card {
+  background-color: var(--clr-card);
+  border-color: var(--clr-card-border);
+}
+
+.t-input {
+  background-color: var(--clr-input);
+  border-color: var(--clr-input-border);
+  color: var(--clr-input-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.t-input::placeholder { color: var(--clr-input-ph); }
+.t-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  outline: none;
+}
+
+.t-item {
+  background-color: var(--clr-item);
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.t-item:hover {
+  background-color: var(--clr-item-hover);
+  border-color: var(--clr-item-border);
+}
+
+.t-title    { color: var(--clr-title); }
+.t-subtitle { color: var(--clr-subtitle); }
+.t-label    { color: var(--clr-label); }
+.t-heading  { color: var(--clr-heading); }
+.t-task     { color: var(--clr-task); }
+.t-task-done{ color: var(--clr-task-done); }
+
+.t-empty {
+  background-color: var(--clr-empty-bg);
+  border-color: var(--clr-empty-border);
+  color: var(--clr-empty-text);
+}
+
+.t-toggle-label { color: var(--clr-toggle-label); }
+.t-toggle-track { background-color: var(--clr-toggle-track); }
+
+.t-btn-edit {
+  background-color: var(--clr-btn-edit-bg);
+  color: var(--clr-btn-edit-text);
+  transition: background-color 0.15s;
+}
+.t-btn-edit:hover { background-color: var(--clr-btn-edit-hover); }
+
+.t-btn-del {
+  background-color: var(--clr-btn-del-bg);
+  color: var(--clr-btn-del-text);
+  transition: background-color 0.15s;
+}
+.t-btn-del:hover { background-color: var(--clr-btn-del-hover); }

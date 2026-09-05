@@ -53,23 +53,17 @@ const App = () => {
       <Navbar />
 
       <main className="flex-1 flex justify-center py-10 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl border border-white/40 dark:border-gray-700/40 shadow-2xl rounded-3xl p-6 sm:p-8 w-full max-w-2xl min-h-[75vh] flex flex-col transition-all duration-300">
+        <div className="t-card backdrop-blur-xl border shadow-2xl rounded-3xl p-6 sm:p-8 w-full max-w-2xl min-h-[75vh] flex flex-col transition-all duration-300">
 
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-extrabold text-indigo-900 dark:text-indigo-300 tracking-tight">
-              Manage Your Day
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mt-2 font-medium">
-              Stay productive and organized.
-            </p>
+            <h1 className="t-title text-3xl font-extrabold tracking-tight">Manage Your Day</h1>
+            <p className="t-subtitle mt-2 font-medium">Stay productive and organized.</p>
           </div>
 
           {/* Add Task */}
           <section className="w-full mb-8">
-            <h2 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-3 px-1">
-              Add a new task
-            </h2>
+            <h2 className="t-label text-lg font-bold mb-3 px-1">Add a new task</h2>
             <TodoInput value={todo} onChange={handleChange} onAdd={handleAdd} />
           </section>
 
@@ -78,15 +72,13 @@ const App = () => {
 
           {/* Task List */}
           <section className="flex-1">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 px-1">
+            <h2 className="t-heading text-xl font-bold mb-4 px-1">
               {showFinished ? "Completed Tasks" : "Active Tasks"}
             </h2>
 
             {visibleTodos.length === 0 ? (
-              <div className="text-center py-10 px-4 bg-white/40 dark:bg-gray-700/30 rounded-2xl border border-dashed border-gray-300 dark:border-gray-600">
-                <p className="text-gray-500 dark:text-gray-400 font-medium">
-                  {showFinished ? "No completed tasks yet." : "No active tasks. Add one above!"}
-                </p>
+              <div className="t-empty text-center py-10 px-4 rounded-2xl border border-dashed font-medium">
+                {showFinished ? "No completed tasks yet." : "No active tasks. Add one above!"}
               </div>
             ) : (
               <div className="space-y-3">
