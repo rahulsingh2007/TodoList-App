@@ -10,7 +10,7 @@ const TodoItem = ({ item, onToggle, onEdit, onDelete }) => (
             className="w-5 h-5 shrink-0 rounded accent-indigo-600 cursor-pointer"
         />
 
-        <span className={`flex-1 text-base font-medium break-words min-w-0 transition-all ${item.isCompleted ? "t-task-done line-through" : "t-task"}`}>
+        <span className={`flex-1 text-base font-medium wrap-break-word min-w-0 transition-all ${item.isCompleted ? "t-task-done line-through" : "t-task"}`}>
             {item.todo}
         </span>
 
