@@ -5,17 +5,11 @@ import { SquarePen, Trash2 } from "lucide-react";
 
 const App = () => {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const todoString = localStorage.getItem("todos");
+    return todoString ? JSON.parse(todoString) : [];
+  });
   const [showFinished, setShowFinished] = useState(false);
-
-  // 1. Load from LocalStorage ONCE on mount
-  useEffect(() => {
-    let todoString = localStorage.getItem("todos");
-    if (todoString) {
-      let loadedTodos = JSON.parse(todoString);
-      setTodos(loadedTodos);
-    }
-  }, []);
 
   useEffect(() => {
     if (todos.length > 0) {
@@ -63,7 +57,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-transparent flex flex-col">
       <Navbar />
-      <main className="flex-grow flex justify-center py-10 px-4 sm:px-6 lg:px-8">
+      <main className="grow flex justify-center py-10 px-4 sm:px-6 lg:px-8">
         <div className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-6 sm:p-8 w-full max-w-2xl min-h-[75vh] flex flex-col transition-all">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-extrabold text-indigo-900 tracking-tight">Manage Your Day</h1>
@@ -78,7 +72,7 @@ const App = () => {
                 value={todo} 
                 type="text" 
                 placeholder="What do you need to do?"
-                className="flex-grow bg-white border border-gray-200 text-gray-800 placeholder-gray-400 py-3 px-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm" 
+                className="grow bg-white border border-gray-200 text-gray-800 placeholder-gray-400 py-3 px-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm" 
               />
               <button 
                 onClick={handleAdd} 
@@ -107,7 +101,7 @@ const App = () => {
             </div>
           </div>
 
-          <div className="flex-grow">
+          <div className="grow">
             <h2 className="text-xl font-bold text-gray-800 mb-4 px-1">Your Tasks</h2>
             
             <div className="space-y-3">
@@ -120,7 +114,7 @@ const App = () => {
               {todos.map((item) => (
                 (showFinished ? item.isCompleted : !item.isCompleted) && (
                   <div key={item.id} className="group flex justify-between w-full p-4 bg-white/80 hover:bg-white border border-transparent hover:border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 items-center">
-                    <div className="flex gap-4 items-center min-w-0 mr-4 flex-grow">
+                    <div className="flex gap-4 items-center min-w-0 mr-4 grow">
                       <input 
                         name={item.id} 
                         onChange={handleCheckBox} 
@@ -128,7 +122,7 @@ const App = () => {
                         checked={item.isCompleted} 
                         className="w-5 h-5 shrink-0 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer accent-indigo-600" 
                       />
-                      <div className={`text-base font-medium transition-all ${item.isCompleted ? "line-through text-gray-400" : "text-gray-700"} break-words min-w-0 flex-grow`}>
+                      <div className={`text-base font-medium transition-all ${item.isCompleted ? "line-through text-gray-400" : "text-gray-700"} wrap-break-word min-w-0 grow`}>
                         {item.todo}
                       </div>
                     </div>
