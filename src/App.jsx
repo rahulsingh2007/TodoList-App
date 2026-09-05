@@ -61,44 +61,93 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-transparent flex flex-col">
       <Navbar />
-      <div className="flex justify-center">
-        <div className="mx-5 my-5 rounded-xl p-5 bg-violet-100 min-h-[80vh] w-1/2">
-          <div className="my-5 w-full flex flex-col items-center">
-            <h2 className="text-lg font-bold self-start">Add a todo</h2>
-            <input onChange={handleChange} value={todo} type="text" className="bg-white w-full py-2 rounded-lg px-2 my-2" />
-            <button onClick={handleAdd} disabled={todo.length <= 3} className="bg-violet-800 hover:bg-violet-950 px-2 py-1 text-sm font-bold transition-all duration-150 w-1/2 text-white disabled:bg-violet-400 rounded-md mx-6">Save</button>
-          </div>
-          
-          <div className="flex gap-2 items-center my-4">
-            <input type="checkbox" onChange={toggleFinished} checked={showFinished} id="showFinished" /> 
-            <label htmlFor="showFinished" className="font-semibold text-sm">Show Finished Only</label>
+      <main className="flex-grow flex justify-center py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-6 sm:p-8 w-full max-w-2xl min-h-[75vh] flex flex-col transition-all">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-extrabold text-indigo-900 tracking-tight">Manage Your Day</h1>
+            <p className="text-gray-500 mt-2 font-medium">Stay productive and organized.</p>
           </div>
 
-          <h2 className="text-lg font-bold">Your Todos</h2>
-          <div>
-            {todos.length === 0 && <div className="m-5">No todos to display</div>}
-            {todos.map((item) => (
-              (showFinished ? item.isCompleted : !item.isCompleted) && (
-                <div key={item.id} className="flex justify-between w-full my-2 items-center">
-                  <div className="flex gap-5 items-center min-w-0 mr-4">
-                    <input name={item.id} onChange={handleCheckBox} type="checkbox" checked={item.isCompleted} className="shrink-0" />
-                    <div className={`${item.isCompleted ? "line-through text-gray-500" : ""} break-all min-w-0`}>
-                      {item.todo}
+          <div className="w-full mb-8">
+            <h2 className="text-lg font-bold text-gray-700 mb-3 px-1">Add a new task</h2>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input 
+                onChange={handleChange} 
+                value={todo} 
+                type="text" 
+                placeholder="What do you need to do?"
+                className="flex-grow bg-white border border-gray-200 text-gray-800 placeholder-gray-400 py-3 px-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm" 
+              />
+              <button 
+                onClick={handleAdd} 
+                disabled={todo.length <= 3} 
+                className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed text-white px-6 py-3 font-bold rounded-2xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center whitespace-nowrap"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 mb-6 px-1">
+            <div className="relative flex items-start">
+              <div className="flex items-center h-5">
+                <input 
+                  type="checkbox" 
+                  onChange={toggleFinished} 
+                  checked={showFinished} 
+                  id="showFinished" 
+                  className="w-5 h-5 border-gray-300 rounded text-indigo-600 focus:ring-indigo-600 cursor-pointer accent-indigo-600 transition-all"
+                /> 
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="showFinished" className="font-semibold text-gray-700 cursor-pointer select-none">Show Finished Only</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-grow">
+            <h2 className="text-xl font-bold text-gray-800 mb-4 px-1">Your Tasks</h2>
+            
+            <div className="space-y-3">
+              {todos.length === 0 && (
+                <div className="text-center py-10 px-4 bg-white/40 rounded-2xl border border-dashed border-gray-300">
+                  <p className="text-gray-500 font-medium">No tasks yet. Add one above!</p>
+                </div>
+              )}
+              
+              {todos.map((item) => (
+                (showFinished ? item.isCompleted : !item.isCompleted) && (
+                  <div key={item.id} className="group flex justify-between w-full p-4 bg-white/80 hover:bg-white border border-transparent hover:border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 items-center">
+                    <div className="flex gap-4 items-center min-w-0 mr-4 flex-grow">
+                      <input 
+                        name={item.id} 
+                        onChange={handleCheckBox} 
+                        type="checkbox" 
+                        checked={item.isCompleted} 
+                        className="w-5 h-5 shrink-0 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer accent-indigo-600" 
+                      />
+                      <div className={`text-base font-medium transition-all ${item.isCompleted ? "line-through text-gray-400" : "text-gray-700"} break-words min-w-0 flex-grow`}>
+                        {item.todo}
+                      </div>
+                    </div>
+                    <div className="flex shrink-0 gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                      <button onClick={(e) => { handleEdit(e, item.id) }} className="p-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 hover:text-indigo-700 rounded-xl transition-colors shadow-sm focus:outline-none">
+                        <SquarePen size={18} />
+                      </button>
+                      <button onClick={(e) => { handleDelete(e, item.id) }} className="p-2 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 rounded-xl transition-colors shadow-sm focus:outline-none">
+                        <Trash2 size={18} />
+                      </button>
                     </div>
                   </div>
-                  <div className="flex shrink-0">
-                    <button onClick={(e) => { handleEdit(e, item.id) }} className="bg-violet-800 hover:bg-violet-950 px-2 py-1 text-sm font-bold transition-all duration-150 text-white rounded-md mx-1"><SquarePen size={16} /></button>
-                    <button onClick={(e) => { handleDelete(e, item.id) }} className="bg-violet-800 hover:bg-violet-950 px-2 py-1 text-sm font-bold transition-all duration-150 text-white rounded-md mx-1"><Trash2 size={16} /></button>
-                  </div>
-                </div>
-              )
-            ))}
+                )
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </>
+      </main>
+    </div>
   )
 }
 
