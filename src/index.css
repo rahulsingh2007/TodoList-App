@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
-
 body {
   font-family: 'Outfit', sans-serif;
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
   background-attachment: fixed;
+  transition: background 0.3s ease;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
 }
