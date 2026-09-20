@@ -4,6 +4,12 @@ A sleek, responsive, and component-driven Todo List application built with **Rea
 
 ---
 
+## 🌐 Live Demo
+
+> 🔗 **[rahul-todolist-react.netlify.app](https://rahul-todolist-react.netlify.app)**
+
+---
+
 ## 📸 Screenshots
 
 ### ☀️ Light Mode
